@@ -57,3 +57,24 @@ export const noise = (context: CanvasRenderingContext2D, imageData: ImageData): 
 
   return result;
 };
+
+export const grayscale = (context: CanvasRenderingContext2D, imageData: ImageData): ImageData => {
+  const pixel = imageData.data;
+  const gray = new Uint8ClampedArray(imageData.width * imageData.height);
+
+  const result = context.createImageData(imageData);
+  for (let x = 0; x < imageData.height; x += 1) {
+    for (let y = 0; y < imageData.width; y += 1) {
+      const index = x * imageData.width * 4 + y * 4;
+
+      gray[index / 4] = 0.3 * pixel[index + 0] + 0.59 * pixel[index + 1] + 0.11 * pixel[index + 2];
+
+      result.data[index + 0] = gray[index / 4];
+      result.data[index + 1] = gray[index / 4];
+      result.data[index + 2] = gray[index / 4];
+      result.data[index + 3] = pixel[index + 3];
+    }
+  }
+
+  return result;
+};

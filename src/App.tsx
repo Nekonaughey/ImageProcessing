@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { changeContrast, noise } from './Util';
+import { changeContrast, noise, grayscale } from './Util';
+
+const cuon = require('./cuon-image');
 
 const App = () => {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -11,9 +13,16 @@ const App = () => {
       image.onload = () => {
         context.drawImage(image, 0, 0);
         const imageData = context.getImageData(0, 0, image.width, image.height);
+        const pixel = imageData.data;
+
+        console.log(cuon);
+        const gray = new Uint8ClampedArray(image.width * image.height);
+        cuon.toGray(pixel, gray);
+        cuon.drawGrayImage(gray, 0, 0, context, imageData);
         // const result = changeContrast(context, imageData, 0.2, 50, 40, 130, 30);
-        const result = noise(context, imageData);
-        context.putImageData(result, 0, 0);
+        // const result = noise(context, imageData);
+        // const result = grayscale(context, imageData);
+        // context.putImageData(result, 0, 0);
       };
       image.src = 'sky.png';
     }
