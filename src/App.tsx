@@ -8,6 +8,10 @@ const App = () => {
       const image = new Image();
       image.onload = () => {
         context.drawImage(image, 0, 0);
+
+        const imageData = context.getImageData(0, 0, image.width, image.height);
+        const data = imageData.data;
+        console.log(data[0], data[1], data[2], data[3]);
       };
       image.src = 'sky.png';
     }
