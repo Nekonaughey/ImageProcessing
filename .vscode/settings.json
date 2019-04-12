@@ -1,0 +1,25 @@
+{
+  "files.insertFinalNewline": true,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+  "prettier.tslintIntegration": true,
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "git.ignoreLimitWarning": true,
+
+  // for .ts
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  // for .tsx
+  "[typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  // for .json with comment
+  "[jsonc]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  }
+}
