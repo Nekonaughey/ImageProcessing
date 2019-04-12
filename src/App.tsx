@@ -30,24 +30,31 @@ const App = () => {
           const targetGray = new Uint8ClampedArray(targetImage.width * targetImage.height);
           cuon.toGray(targetPixel, targetGray);
 
-          let count = 0;
-          for (let templateY = 0; templateY < templateImage.height; templateY += 1) {
-            for (let templateX = 0; templateX < templateImage.width; templateX += 1) {
-              const index = templateX + templateImage.width * templateY;
+          for (let targetY = 0; targetY < targetImage.height - templateImage.height + 1; targetY += 1) {
+            for (let targetX = 0; targetX < targetImage.width - templateImage.width + 1; targetX += 1) {
+              let count = 0;
+              for (let templateY = 0; templateY < templateImage.height; templateY += 1) {
+                for (let templateX = 0; templateX < templateImage.width; templateX += 1) {
+                  const templateIndex = templateX + templateImage.width * templateY;
 
-              if (targetGray[index] === templateGray[index]) count++;
+                  const targetIndex = targetX + templateX + targetImage.width * (targetY + templateY);
+
+                  if (targetGray[targetIndex] === templateGray[templateIndex]) {
+                    count++;
+                  }
+                }
+              }
+              console.log(count);
+              console.log(templateImage.width * templateImage.height);
+              if (count === templateImage.width * templateImage.height) {
+                alert('一致した');
+                return;
+              }
             }
           }
-
-          console.log(count);
-          console.log(templateImage.width * templateImage.height);
-          if (count === templateImage.width * templateImage.height) {
-            alert('一致した');
-          } else {
-            alert('不一致');
-          }
         };
-        targetImage.src = 'template.png';
+        alert('不一致');
+        targetImage.src = 'target.png';
       };
       templateImage.src = 'template.png';
     }
