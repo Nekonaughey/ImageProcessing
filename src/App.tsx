@@ -10,16 +10,16 @@ const App = () => {
         context.drawImage(image, 0, 0);
         const imageData = context.getImageData(0, 0, image.width, image.height);
 
-        console.log(image.width, image.height);
-        // 縦に10ピクセルを緑で塗り潰す
-        for (let i = 0; i < 10; i++) {
+        const pixel = imageData.data;
+
+        // 画面全体のコントラストを変更する。
+        const intensity = 0.5;
+        for (let i = 0; i < image.height; i++) {
           for (let j = 0; j < image.width * 4; j = j + 4) {
             const index = i * image.width * 4 + j;
-            console.log(index);
-            imageData.data[index + 0] = 0;
-            imageData.data[index + 1] = 255;
-            imageData.data[index + 2] = 0;
-            imageData.data[index + 3] = 255;
+            pixel[index + 0] = (pixel[index + 0] - 128) * intensity + 128;
+            pixel[index + 1] = (pixel[index + 1] - 128) * intensity + 128;
+            pixel[index + 2] = (pixel[index + 2] - 128) * intensity + 128;
           }
         }
         context.putImageData(imageData, 0, 0);
