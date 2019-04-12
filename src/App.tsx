@@ -13,10 +13,10 @@ const App = () => {
         const pixel = imageData.data;
 
         // 画面全体のコントラストを変更する。
-        const intensity = 0.5;
-        for (let i = 0; i < image.height; i++) {
-          for (let j = 0; j < image.width * 4; j = j + 4) {
-            const index = i * image.width * 4 + j;
+        const intensity = 0.2;
+        for (let i = 40; i < 70; i++) {
+          for (let j = 50; j < 180; j++) {
+            const index = i * image.width * 4 + j * 4;
             pixel[index + 0] = (pixel[index + 0] - 128) * intensity + 128;
             pixel[index + 1] = (pixel[index + 1] - 128) * intensity + 128;
             pixel[index + 2] = (pixel[index + 2] - 128) * intensity + 128;
